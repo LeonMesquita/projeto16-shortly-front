@@ -11,18 +11,18 @@ export default function Home(){
     const [url, setUrl] = useState('');
     const {apiUrl, setUserName, authorization} = useContext(Context);
     const [shortenedUrls, setShortenedUrls] = useState([]);
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(true);
+
     async function getUserUrls(){
         setIsLoading(true);
         
         try{
             const promise = await axios.get(`${apiUrl}/users/me`, authorization);
-            console.log(promise.data.shortenedUrls);
             setShortenedUrls(promise.data.shortenedUrls);
             
 
         }catch(error){
-           // alert('Erro ao obter urls do usuário!');
+            alert('Erro ao obter urls do usuário!');
         }
         setIsLoading(false);
     }
@@ -31,7 +31,6 @@ export default function Home(){
     async function shortenUrl(){
         try{
             const promise = await axios.post(`${apiUrl}/urls/shorten`,{url}, authorization);
-            console.log(promise.data)
             getUserUrls();
         }catch(error){
             alert('Não foi possível encurtar a URL!');
@@ -47,9 +46,15 @@ export default function Home(){
 
 
     async function openUrl(shortUrl){
+       
         try{
-            await axios.get(`${apiUrl}/urls/open/${shortUrl}`);
+            const promise = await axios.get(`${apiUrl}/urls/open/${shortUrl}`);
+            //<Redirect to={url} />
             
+            const url = promise.data.replace('OK. Redirecting to ', '');
+            
+           window.open(url);
+           getUserUrls();
         }catch(error){
             alert('Não foi possível abrir a URL!');
         }
@@ -93,13 +98,13 @@ export default function Home(){
                      </span>
                      
                      <p>{url.shortUrl}</p>
-                     <p>{url.visitCount}</p>
+                     <p>Quantidade de visitantes:{url.visitCount}</p>
                  </div>
                  <button onClick={() => deleteUrl(url.id)}>
                      <TrashOutline
                          color={'#EA4F4F'} 
                          height="50px"
-                         width="50px"
+                         width="30px"
                      />
                  </button>
              </UrlsDiv>)  
@@ -109,10 +114,7 @@ export default function Home(){
         :null
     );
 }
-/*
 
-
-*/
 const HomePage = styled.div`
 
 
@@ -146,18 +148,16 @@ const UrlsDiv = styled.div`
     height: 100%;
     display: flex;
     align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
    }
 
    p{
     overflow: hidden;
-    font-family: 'Lexend Deca';
     font-style: normal;
-    font-weight: 400;
+    font-weight: 700;
     font-size: 14px;
-
-
-
-color: #FFFFFF;
+    color: #FFFFFF;
    }
 
     div{
@@ -185,6 +185,14 @@ color: #FFFFFF;
         align-items: center;
         justify-content: center;
     }
+
+
+    @media(max-width: 640px) {
+        p{
+            font-size: 8px;
+        }
+     
+  }
 `
 
 

@@ -2,20 +2,26 @@ import styled from 'styled-components';
 import trophy from '../../assets/images/trophy.svg';
 import Context from '../../contexts/Context';
 import axios from 'axios';
+import LoaderThreeDots from '../../components/LoaderThreeDots';
+
 
 import {useContext, useEffect, useState } from "react";
 export default function Ranking(){
     const {token, apiUrl} = useContext(Context);
     const [ranking, setRanking] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
     async function getRanking(){
+        setIsLoading(true);
         try{
             const promise = await axios.get(`${apiUrl}/ranking`);
-            console.log(promise.data)
+            
             setRanking(promise.data);
-
+            
         }catch(error){
             alert('Não foi possível obter a lista de ranking')
         }
+        setIsLoading(false);
 
     }
 
@@ -30,10 +36,16 @@ export default function Ranking(){
                 <h1>Ranking</h1>
             </RankingTitle>
             <RankingArea>
-                {ranking.length === 0 ?
+                {
+                    isLoading ? <LoaderThreeDots />
+                    :
+
+                
+                ranking.length === 0 ?
                 null
                 :
                 ranking.map((rank, index) => <p>{index+1}. {rank.name} - {rank.linksCount} links - {rank.visitCount} visualizações</p>)
+                
                 }
 
             </RankingArea>

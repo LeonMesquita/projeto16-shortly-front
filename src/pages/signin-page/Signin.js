@@ -6,8 +6,8 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
 export default function Signin(){
-    const [email, setEmail] = useState('lelo@gmail.com');
-    const [password, setPassword] = useState('12345');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const {apiUrl, setUserName, setToken} = useContext(Context);
     const navigate = useNavigate();
     
@@ -21,14 +21,13 @@ export default function Signin(){
 
         try{
             const promise = await axios.post(`${apiUrl}/signin`, body);
-          //  console.log(promise.data);
             setToken(promise.data);
             navigate('/');
 
         }catch(error){
             console.log(error);
             alert('Não foi possível fazer login')
-        }//
+        }
     }
     return(
         <> 

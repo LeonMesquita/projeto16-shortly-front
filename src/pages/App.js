@@ -13,6 +13,8 @@ export default function App(){
    //const apiUrl = 'http://localhost:4000';
     const [token, setToken] = useState('');
     const [userName, setUserName] = useState('');
+    const [activeLink, setActiveLink] = useState('');
+
 
     const authorization = {
         headers: {
@@ -22,7 +24,7 @@ export default function App(){
     
     return(
        <div className="main-container">
-         <Context.Provider value={{apiUrl, userName, setUserName,token, setToken, authorization}}>
+         <Context.Provider value={{apiUrl, userName, setUserName,token, setToken, authorization, activeLink, setActiveLink}}>
             <BrowserRouter>
             <Title />  
 

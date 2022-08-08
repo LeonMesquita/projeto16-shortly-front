@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Mega:wght@400;500;600;700&family=Playball&family=Raleway:wght@400;700&family=Saira+Stencil+One&display=swap');
+
+*{
+    font-family: 'Lexend Mega', sans-serif;
+}
+
+
 .main-container{
     min-height: 100vh;
   
@@ -36,4 +43,14 @@ input:focus {
     input{
         width: 90%;
     }
+}
+
+
+*::-webkit-scrollbar {
+    display: none;
+}
+
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
