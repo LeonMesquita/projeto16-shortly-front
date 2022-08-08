@@ -35,10 +35,10 @@ export default function Signup(){
     return(
         <> 
         <TextForm onSubmit={submitRegister}>
-            <input placeholder='Nome' value={name} onChange={e => setName(e.target.value)}/>
-            <input placeholder='Email' value={email} onChange={e => setEmail(e.target.value)}/>
-            <input placeholder='Senha' value={password} onChange={e => setPassword(e.target.value)}/>
-            <input placeholder='Confirmar Senha' value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}/>
+            <input required={true} placeholder='Nome' value={name} onChange={e => setName(e.target.value)}/>
+            <input required={true}  placeholder='Email' value={email} onChange={e => setEmail(e.target.value)}/>
+            <input required={true}  placeholder='Senha' value={password} onChange={e => setPassword(e.target.value)}/>
+            <input required={true}  placeholder='Confirmar Senha' value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}/>
             <StandardButton buttonText='Cadastrar-se'/>
         </TextForm>
         </>

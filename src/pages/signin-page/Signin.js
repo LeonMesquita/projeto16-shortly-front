@@ -32,8 +32,8 @@ export default function Signin(){
     return(
         <> 
         <TextForm onSubmit={submitLogin}>
-            <input placeholder='Email' value={email} onChange={e => setEmail(e.target.value)}/>
-            <input placeholder='Senha' value={password} onChange={e => setPassword(e.target.value)}/>
+            <input required={true}  placeholder='Email' value={email} onChange={e => setEmail(e.target.value)}/>
+            <input required={true}  placeholder='Senha' value={password} onChange={e => setPassword(e.target.value)}/>
             <StandardButton buttonText='Entrar'/>
         </TextForm>
         </>
